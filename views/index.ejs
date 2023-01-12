@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/style.css">
+    <title>WatchJS</title>
+</head>
+<body>
+    <!--Saatin gösterileceği alan-->
+    <div class="container">
+        <div class="clock"></div>
+    </div>
+
+
+    <!--Saati otomatik olarak oluşturan script alanıdır-->
+    <script>
+
+        const clock = document.querySelector('.clock');
+
+        // Saati gösteren değerler (saat, dakika, saniye ve durum)
+        const tick = () => {
+        const now = new Date();
+        let h = now.getHours();
+        const m = now.getMinutes();
+        const s = now.getSeconds();
+        let am_pm = 'ÖS';
+        
+        // 24 saati 12'lik dilimler halinde kontrol et
+            if (h >= 12) {
+                h -= 12; 
+                am_pm = "ÖÖ";
+            };
+            if (h == 0) {
+                h = 12;
+                am_pm = "ÖS";
+            };
+        
+        // Dijital saatin oluşması için gerekli html kodu
+        const html = `
+        <span>${h}</span> : 
+        <span>${m}</span> : 
+        <span>${s}</span> 
+        <span class="ampm">${am_pm}</span>
+        `; 
+
+        // Yukarda oluşturulan div içerisine değerleri gönderen alan
+        clock.innerHTML = html;
+        };
+
+        //Her bir saniyede yenilenmesi için gerekli kod
+        setInterval(tick, 1000);
+
+    </script>
+</body>
+</html>
